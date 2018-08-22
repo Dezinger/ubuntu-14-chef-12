@@ -22,3 +22,5 @@ RUN apt-get update && \
     rm -rf /var/cache/apt/archives/*
 
 VOLUME ["$COOKBOOK_PATH"]
+
+WORKDIR "$COOKBOOK_PATH"
