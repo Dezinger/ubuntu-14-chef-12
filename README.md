@@ -1,0 +1,3 @@
+# Chef 12 on Ubuntu 14.04 LTS (Trusty) Docker Image
+
+...
