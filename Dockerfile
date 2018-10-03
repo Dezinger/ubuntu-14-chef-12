@@ -16,7 +16,7 @@ COPY files/ /
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install $APT_ARGS \
-    ca-certificates git && \
+    ca-certificates git ssh && \
     curl -L --progress-bar https://www.chef.io/chef/install.sh | bash -s -- -P chefdk -v ${CHEFDK_VER} && \
     chef gem install knife-openvpn -v 0.0.2 && \
     mkdir -p $COOKBOOK_PATH && \
