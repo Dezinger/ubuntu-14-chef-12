@@ -20,6 +20,8 @@ RUN apt-get update && \
     curl -L --progress-bar https://www.chef.io/chef/install.sh | bash -s -- -P chefdk -v ${CHEFDK_VER} && \
     chef gem install knife-openvpn -v 0.0.2 && \
     mkdir -p $COOKBOOK_PATH && \
+# setup mode
+    chmod +x /usr/local/bin/add-ssh-keys.sh && \    
 # Clean and remove not required packages
     apt-get autoremove -y && \
     rm -rf /var/cache/apt/archives/*
