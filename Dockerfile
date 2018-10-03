@@ -2,6 +2,7 @@ FROM dezinger/ubuntu-14:latest
 
 MAINTAINER dezinger@gmail.com
 
+ENV SSH_KEYS_DIRECTORY /root/.ssh
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/chef/bin:/opt/chef/embedded/bin \
     APT_ARGS="-y --no-install-recommends --no-upgrade" \
     CHEF_REPO_PATH=/tmp/chef
@@ -9,11 +10,13 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/chef/
 ARG COOKBOOK_PATH="/var/cookbooks"
 ARG CHEFDK_VER=0.10
 
+COPY files/ /
+
 # Install chef-client
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install $APT_ARGS \
-    ca-certificates && \
+    ca-certificates git && \
     curl -L --progress-bar https://www.chef.io/chef/install.sh | bash -s -- -P chefdk -v ${CHEFDK_VER} && \
     chef gem install knife-openvpn -v 0.0.2 && \
     mkdir -p $COOKBOOK_PATH && \
@@ -21,6 +24,6 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     rm -rf /var/cache/apt/archives/*
 
-VOLUME ["$COOKBOOK_PATH"]
+VOLUME ["$SSH_KEYS_DIRECTORY", "$COOKBOOK_PATH"]
 
 WORKDIR "$COOKBOOK_PATH"
