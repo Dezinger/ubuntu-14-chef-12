@@ -8,7 +8,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/chef/
     CHEF_REPO_PATH=/tmp/chef
 
 ARG COOKBOOK_PATH="/var/cookbooks"
-ARG CHEFDK_VER=0.9
+ARG CHEFDK_VER=0.8
 
 COPY files/ /
 
